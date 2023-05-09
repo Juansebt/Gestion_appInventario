@@ -24,3 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio),
 ]
+
+#Para poder tener acceso a la carpeta media y poder ver las fotos
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root = settings.MEDIA_ROOT
+    )
