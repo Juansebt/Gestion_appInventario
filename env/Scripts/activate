@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="E:\Juan Sebastian Laguna Yara\Python\Django\Proyecto inventario\Proyecto_inventario\env"
+VIRTUAL_ENV="D:\Juan Sebastian Laguna Yara\Python\Django\Proyecto inventario\Proyecto_inventario\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
