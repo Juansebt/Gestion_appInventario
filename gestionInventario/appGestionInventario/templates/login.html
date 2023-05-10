@@ -16,7 +16,7 @@
                 <div class="card-body p-5 text-center">
                     <h3 class="mb-5 fw-bold">INGRESAR</h3>
                     <hr>
-                    <form action="" method="post" class="was-validated">
+                    <form action="/login/" method="post" class="was-validated">
                         {% csrf_token %}
                         <div class="form-floating mb-4">
                             <input type="text" name="txtUsername" id="txtUsername" class="form-control" required
@@ -31,15 +31,15 @@
                         </div>
                         <!-- <div class="mb-2">
                             <button class="btn btn-secondary mb-2" onclick="verContrasena(this)">Mostrar contraseña</button>
-                        </div>    -->
+                        </div> -->
                         <hr>
                         <div class="mb-2">
                             <button class="btn btn-success mb-2">Ingresar</button>
                             <br>
                             <a href="http://">¿Olvidó su contraseña?</a>
                         </div>
+                        <div class="g-recaptcha d-flex justify-content-center align-items-center h-100" data-sitekey="6Le9EfolAAAAAH8NUHlSRdT7V9p2kih39aNoP4l9"></div>
                     </form>
-                    <div class="g-recaptcha d-flex justify-content-center align-items-center h-100" data-sitekey="6Le9EfolAAAAAH8NUHlSRdT7V9p2kih39aNoP4l9"></div>
                     <div class="text-center">
                         {% if mensaje %}
                         <script>
