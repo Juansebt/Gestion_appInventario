@@ -13,8 +13,8 @@
     <br>
     <br>
     <div class="d-flex justify-content-center align-items-center h-100">
-        <a href="/vistaProducto/">
-        <button class="btn btn-success rounded-pill mb-2 fw-bold" style="letter-spacing: 2px;">AGREGAR PRODUCTO</button>
+        <a href="/vistaRegistrarUsuario/">
+        <button class="btn btn-success rounded-pill mb-2 fw-bold" style="letter-spacing: 2px;">AGREGAR USUARIO</button>
         </a>
     </div>
     <br>
@@ -25,7 +25,7 @@
                 <table id="tblUsuarios" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th colspan="7" class="text-white text-center" style="background-color: rgb(89, 181, 72);">LISTA DE PRODUCTOS</th>
+                            <th colspan="7" class="text-white text-center" style="background-color: rgb(89, 181, 72);">GESTIONAR USUARIOS</th>
                         </tr>
                         <tr class="bg-white">
                             <th>Nombre completo</th>
@@ -36,14 +36,13 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        {% for rol in listaRoles %}
+                        {% for usuario in listaUsuarios %}
                             <tr>
-                                <td>{{rol.Nombre}}</td>
-                                <td>{{rol.Correo}}</td>
-                                <td>${{rol.Tipo}}</td>
-                                <td>{{rol.Foto}}</td>
+                                <td>{{usuario.first_name}} {{usuario.last_name}}</td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.userTipo}}</td>
                                 <td class="text-center">
-                                    <img src="../media/{{producto.proFoto}}" alt="" width="50" height="40">
+                                    <img src="../media/{{usuario.userFoto}}" alt="" width="50" height="40">
                                 </td>
                                 <td>
                                     <a href="/consultarProducto/{{producto.id}}"><i class="fa fa-edit text-warning"></i></a>

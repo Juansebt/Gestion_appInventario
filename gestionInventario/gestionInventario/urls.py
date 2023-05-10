@@ -25,6 +25,11 @@ urlpatterns = [
     path('inicio/', views.inicio),
     path('vistaRegistrarUsuario/', views.vistaRegistrarUsuario),
     path('registrarUsuario/', views.registrarUsuario),
+    path('vistaGestionarUsuarios/', views.vistaGestionarUsuarios),
+    path('login/', views.vistaLogin),
+    path('vistaLogin/', views.vistaLogin),
+    path('login/', views.login),
+    path('inicioAdministrador/', views.inicioAdministrador),
 ]
 
 #Para poder tener acceso a la carpeta media y poder ver las fotos

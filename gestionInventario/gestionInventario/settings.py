@@ -141,3 +141,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'appGestionInventario.User'
+
+# Recaptcha
+GOOGLE_RECAPTCHA_SECRET_KEY = "6Le9EfolAAAAAH8Zn5MUnbZnuXYraOPEFRzYnYnN"
+
+# variable configuración correo
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "juansebt.0610@gmail.com"
+EMAIL_HOST_PASSWORD = "byyxonjfuwwcrvsx"
+EMAIL_USE_TLS = True

@@ -7,6 +7,7 @@
 {% block menu %}
     {% include "administrador/menu.html" %}
 {% endblock %}
+{% block contenido %}
 <div class="m-4 border rounded">
     <div class="mt-5 text-center">
         <h4>REGISTRAR USUARIO</h4>
@@ -43,7 +44,9 @@
                 <label for="cbTipo" class="form-label">Tipo</label>
                 <select class="form-select" id="cbTipo" name="cbTipo" required value="">
                     <option selected disabled value="">Seleccione...</option>
-                    <option>...</option>
+                    {% for usuario in tipoUsuario %}
+                        <option value="{{usuario.0}}">{{usuario.0}}</option>
+                    {% endfor %}
                 </select>
                 <div class="invalid-feedback">
                     Selecciona un tipo.
@@ -53,7 +56,9 @@
                 <label for="cbRol" class="form-label">Rol en el sistema</label>
                 <select class="form-select" id="cbRol" name="cbRol" required value="">
                     <option selected disabled value="">Seleccione...</option>
-                    <option>...</option>
+                    {% for rol in roles %}
+                        <option value="{{rol.id}}">{{rol.name}}</option>
+                    {% endfor %}
                 </select>
                 <div class="invalid-feedback">
                     Selecciona un estado válido.
@@ -69,13 +74,13 @@
             </div>
             <div class="btn-group" role="group" style="width: 50px;">
                     <button class="btn btn-secondary fw-bold" style="letter-spacing: 2px;">AGREGAR</button>
-                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;">CANCELAR</button>
+                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;" disabled>CANCELAR</button>
             </div>
         </form>
         <br>
     </div>
 </div>
-{% block contenido %}
+
 
 {% endblock %}
 

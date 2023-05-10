@@ -15,7 +15,7 @@ function modalEliminar(idProducto) {
     confirmButtonText: "SÍ",
   }).then((result) => {
     if (result.isConfirmed) {
-      location.href = "/eliminarProducto/"+idProducto+"/"
+      location.href = "/eliminarProducto/" + idProducto + "/"
     }
   });
 }
@@ -43,5 +43,16 @@ function mostrarImagen(evt) {
   const archivo = archivos[0]
   const url = URL.createObjectURL(archivo)
 
-  $("#imagenPersona").attr("src",url)
+  $("#imagenPersona").attr("src", url)
 }
+
+// function verContrasena(boton) {
+//   var tipo = document.getElementById("txtPassword");
+//   if (tipo.type == "password") {
+//     tipo.type = "text";
+//     boton.innerText = "Ocultar contraseña";
+//   } else {
+//     tipo.type = "password";
+//     boton.innerText = "Mostrar contraseña";
+//   }
+// }

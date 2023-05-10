@@ -2,7 +2,15 @@ from django.shortcuts import render, redirect
 from django.db import Error, transaction
 from django.contrib.auth.models import Group
 from appGestionInventario.models import *
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.contrib.auth import authenticate
+from django.contrib import auth
 from django.conf import settings
+from smtplib import SMTPException
+import threading
+import urllib
+import json
 import random
 import string
 import os
@@ -14,19 +22,19 @@ def inicio(request):
 
 def vistaRegistrarUsuario(request):
     roles = Group.objects.all()
-    retorno = {"roles":roles, "user":None}
+    retorno = {"roles":roles, "user":None, "tipoUsuario":tipoUsuario}
     return render(request, "administrador/frmRegistrarUsuario.html", retorno)
 
-def listarUsuarios(request):
+def vistaGestionarUsuarios(request):
     mensaje = ""
     estado = ""
     try:
-        roles = Group.objects.all()
+        usuarios = User.objects.all()
         estado = True
     except Error as error:
         mensaje = f"Problemas al obtener los productos {error}"
-    retorno = {"mensaje":mensaje, "estado":estado, "listaRoles":roles}
-    return render(request, "listarUsuarios.html",retorno)
+    retorno = {"mensaje":mensaje, "estado":estado, "listaUsuarios":usuarios}
+    return render(request, "administrador/listarUsuarios.html",retorno)
 
 def registrarUsuario(request):
     try:
@@ -61,6 +69,17 @@ def registrarUsuario(request):
             mensaje = f"Ususario agregado correctamente"
             retorno = {"mensaje":mensaje}
             # enviar correo al usuario
+            asunto = 'Registro Sistema CIES-NEIVA'
+            mensaje = f'Cordial saludo, <b>{user.first_name} {user.last_name}</b>, nos permitimos \
+                informarle que usted ha sido registrado en el sistema de Gestión de Inventarios \
+                del centro de la industria, la empresa y los servicios CIES de la ciudad de Neiva.\
+                    No permitimos enviarle las credenciales de ingreso a nuestro sistema.<br>\
+                    <br><b>USERNAME:<\b> {user.username}\
+                    <br><b>PASSWORD:<\b> {passwordGenerado}\
+                    <br><br>Lo invitamos a ingresar al sistema en la url:\
+                    https://gestioninventario.sena.edu.co.'
+            threa = threading.Thread(target=enviarCorreo, args=(asunto,mensaje,user.email))
+            threa.start()
             return redirect("/vistaGestionarUsuarios/", retorno)
     except Error as error:
         transaction.rollback()
@@ -76,3 +95,64 @@ def generarPassword():
         password += ''.join(random.choice(caracteres))
     return password
 
+def vistaLogin(request):
+    return render(request,"login.html")
+
+def login(request):
+    # validar recaptcha
+    """ Begin reCAPTCHA validation """
+    recaptcha_response = request.POST.get('g-recaptcha-response')
+    url = 'https://www.google.com/recaptcha/api/siteverify'
+    values = {
+        'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    data = urllib.parse.urlencode(values).encode()
+    req = urllib.request.Request(url, data=data)
+    response = urllib.request.urlopen(req)
+    result = json.loads(response.read().decode())
+    print(result)
+    """ End reCAPTCHA validation """
+    
+    if result['success']:
+        username = request.POST['txtUsername']
+        password = request.POST['txtPassword']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            # registrar la varibale de sesión
+            auth.login(request, user)
+            if user.groups.filter(name='Administrador').exists():
+                return redirect('/inicioAdministrador')
+            elif user.groups.filter(name='Asistente').exists():
+                return redirect('/inicioAsistente')
+            else:
+                return redirect('/inicioInstructor')
+        else:
+            mensaje = f"Usuario o contraseña incorrectas"
+            return render(request,"login.html",{"mensaje":mensaje})
+    else:
+        mensaje = f"Debe validar primero el recaptcha"
+        return render(request,"login.html",{"mensaje":mensaje})
+    
+def inicioAdministrador(request):
+    if request.user.is_authenticated:
+        return render(request,"administrador/inicio.html")
+    else:
+        retorno = {"mensaje":"Debe ingresar con sus credenciales"}
+        return render(request,"login.html",retorno)
+    
+def enviarCorreo(asunto=None,mensaje=None,destinatario=None):
+    remitente = settings.EMAIL_HOST_USER
+    template = get_template('enviarCorreo.html')
+    contenido = template.render({
+        'destinatario': destinatario,
+        'mensaje': mensaje,
+        'asunto': asunto,
+        'remitente': remitente,
+    })
+    try:
+        correo = EmailMultiAlternatives(asunto, mensaje, remitente, [destinatario])
+        correo.attach_alternative(contenido, 'text/html')
+        correo.send(fail_silently=True)
+    except SMTPException as error:
+        print(error)

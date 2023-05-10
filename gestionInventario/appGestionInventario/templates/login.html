@@ -9,18 +9,19 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="container h-100 inicioSesion">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+<div class="container h-100 inicioSesion" style="margin-top: 80px;">
+    <div class="row d-flex justify-content-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
                     <h3 class="mb-5 fw-bold">INGRESAR</h3>
                     <hr>
                     <form action="" method="post" class="was-validated">
+                        {% csrf_token %}
                         <div class="form-floating mb-4">
-                            <input type="text" name="txtUsuario" id="txtUsuario" class="form-control" required
+                            <input type="text" name="txtUsername" id="txtUsername" class="form-control" required
                                 placeholder="Usuario">
-                            <label for="txtUsuario">Usuario: </label>
+                            <label for="txtUsername">Usuario: </label>
                         </div>
 
                         <div class="form-floating mb-4">
@@ -28,9 +29,9 @@
                                 placeholder="Contraseña">
                             <label for="txtPassword">Contraseña: </label>
                         </div>
-                        <div class="mb-2">
+                        <!-- <div class="mb-2">
                             <button class="btn btn-secondary mb-2" onclick="verContrasena(this)">Mostrar contraseña</button>
-                        </div>   
+                        </div>    -->
                         <hr>
                         <div class="mb-2">
                             <button class="btn btn-success mb-2">Ingresar</button>
@@ -38,10 +39,11 @@
                             <a href="http://">¿Olvidó su contraseña?</a>
                         </div>
                     </form>
+                    <div class="g-recaptcha d-flex justify-content-center align-items-center h-100" data-sitekey="6Le9EfolAAAAAH8NUHlSRdT7V9p2kih39aNoP4l9"></div>
                     <div class="text-center">
                         {% if mensaje %}
                         <script>
-                            Swal.fire("Lavadero ADSO", '{{mensaje}}', "warning")
+                            Swal.fire("SING IN", '{{mensaje}}', "warning")
                         </script>
                         {% endif %}
                     </div>
