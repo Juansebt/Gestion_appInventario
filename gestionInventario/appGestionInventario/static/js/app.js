@@ -43,5 +43,5 @@ function mostrarImagen(evt) {
   const archivo = archivos[0]
   const url = URL.createObjectURL(archivo)
 
-  $("#imagenProducto").attr("src",url)
+  $("#imagenPersona").attr("src",url)
 }

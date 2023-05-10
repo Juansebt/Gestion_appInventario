@@ -7,21 +7,74 @@
 {% block menu %}
     {% include "administrador/menu.html" %}
 {% endblock %}
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>REGISTRAR USUARIO</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-
-            </tfoot>
-        </table>
+<div class="m-4 border rounded">
+    <div class="mt-5 text-center">
+        <h4>REGISTRAR USUARIO</h4>
     </div>
+    <br>
+    <hr>
+    <div class="d-flex justify-content-center h-100">
+        <form class="row g-3 was-validated needs-validation m-4" id="" action="/registrarUsuario/" method="post"
+            enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="col-md-4">
+                <label for="txtNombres" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="txtNombres" name="txtNombres" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa los nombres.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="txtApellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="txtApellidos" name="txtApellidos" value=""
+                    required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa los apellidos.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="txtCorreo" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="txtCorreo" name="txtCorreo" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa un correo electrónico.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="cbTipo" class="form-label">Tipo</label>
+                <select class="form-select" id="cbTipo" name="cbTipo" required value="">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>...</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecciona un tipo.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="cbRol" class="form-label">Rol en el sistema</label>
+                <select class="form-select" id="cbRol" name="cbRol" required value="">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>...</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecciona un estado válido.
+                </div>
+            </div>
+            <div class="col-mb-3 mt-4">
+                <label for="fileFoto">Foto de la persona</label>
+                <input type="file" class="form-control" id="fileFoto" name="fileFoto" accept=".jpg">
+                <div class="invalid-feedback">Por favor, carga una foto.</div>
+            </div>
+            <div class="text-center mt-5">
+                <img class="rounded" id="imagenPersona" src="" alt="" width="300" height="300">
+            </div>
+            <div class="btn-group" role="group" style="width: 50px;">
+                    <button class="btn btn-secondary fw-bold" style="letter-spacing: 2px;">AGREGAR</button>
+                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;">CANCELAR</button>
+            </div>
+        </form>
+        <br>
+    </div>
+</div>
 {% block contenido %}
 
 {% endblock %}

@@ -1,40 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@font-face {
+  font-family: "Zurich Ublk EX BT";
+  src: url("./Zurich_UBlkEx_BT_Ultra_Black.ttf");
+}
 
 header {
-    width: 100%;
-    height: 28vh;
-    background-color: #000603;
+  width: 100%;
+  height: 30vh;
+  background-color: rgb(89, 181, 72);
 }
 
 nav {
-    width: 100%;
-    height: 12vh;
-    background-color: #0c2e25;
-    font-weight: bold;
+  width: 100%;
+  height: 15vh;
+  background-color: rgb(35, 130, 118);
+  font-weight: bold;
 }
 
 section {
-    width: 100%;
-    height: 60rem;
-    background-color: rgb(215, 241, 248); height: 61rem;
+  width: 100%;
+  height: 60rem;
+  /* background-color: rgb(215, 241, 248); */
+  background-color: white;
+  height: 61rem;
 }
 
 footer {
-    width: 100%;
-    align-items: center;
-    display: flex;
-    height: 18vh;
-    justify-content: center;
-    background-color: #584740;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  background-color: rgb(89, 181, 72);
 }
 
 #title {
-    letter-spacing: 25px;
-    font-size: 9vh;
-    font-family: 'Lilita One', cursive;
-    opacity: 90%;
+  letter-spacing: 25px;
+  font-size: 9vh;
+  font-family: "Zurich Ublk EX BT", sans-serif;
+  margin-top: 30px;
 }
 
 #pFooter {
-    opacity: 95%;
+  font-family: "Zurich Ublk EX BT";
+  font-size: 15px;
+}
+
+/* .menu-title {
+      font-family: "Zurich Ublk EX BT";
+  } */
+
+.inicioSesion {
+  align-items: center;
+  align-content: center;
 }

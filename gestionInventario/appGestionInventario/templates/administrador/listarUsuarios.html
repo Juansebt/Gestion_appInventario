@@ -1,0 +1,71 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <br>
+    <br>
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <a href="/vistaProducto/">
+        <button class="btn btn-success rounded-pill mb-2 fw-bold" style="letter-spacing: 2px;">AGREGAR PRODUCTO</button>
+        </a>
+    </div>
+    <br>
+    <br>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-9">
+            <div class="text-center">
+                <table id="tblUsuarios" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="7" class="text-white text-center" style="background-color: rgb(89, 181, 72);">LISTA DE PRODUCTOS</th>
+                        </tr>
+                        <tr class="bg-white">
+                            <th>Nombre completo</th>
+                            <th>Correo electrónico</th>
+                            <th>Tipo</th>
+                            <th>Foto</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        {% for rol in listaRoles %}
+                            <tr>
+                                <td>{{rol.Nombre}}</td>
+                                <td>{{rol.Correo}}</td>
+                                <td>${{rol.Tipo}}</td>
+                                <td>{{rol.Foto}}</td>
+                                <td class="text-center">
+                                    <img src="../media/{{producto.proFoto}}" alt="" width="50" height="40">
+                                </td>
+                                <td>
+                                    <a href="/consultarProducto/{{producto.id}}"><i class="fa fa-edit text-warning"></i></a>
+                                    <i class="fa fa-trash text-danger" onclick="modalEliminar('{{producto.id}}')"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            {% if mensaje %}
+                <script>
+                        Swal.fire("GESTIÓN USUARIOS", '{{mensaje}}', "info")
+                </script>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

@@ -23,11 +23,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio),
+    path('vistaRegistrarUsuario/', views.vistaRegistrarUsuario),
+    path('registrarUsuario/', views.registrarUsuario),
 ]
 
 #Para poder tener acceso a la carpeta media y poder ver las fotos
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root = settings.MEDIA_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
