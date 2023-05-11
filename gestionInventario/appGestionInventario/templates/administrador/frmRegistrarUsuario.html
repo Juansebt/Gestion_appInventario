@@ -78,6 +78,19 @@
                         <a href="/vistaGestionarUsuarios/" class="text-white">CANCELAR</a></button>
             </div>
         </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire("Registro Usuario", '{{mensaje}}', "success")
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire("Registro Usuario", '{{mensaje}}', "warning")
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
         <br>
     </div>
 </div>

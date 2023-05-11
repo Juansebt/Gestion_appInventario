@@ -1,0 +1,170 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "administrador/menu.html" %}
+{% endblock %}
+{% block contenido %}
+<div class="m-5 border rounded">
+    <div class="mt-5 text-center">
+        <h4 class="fw-bold">REGISTRAR ELEMENTOS DEVOLUTIVOS</h4>
+    </div>
+    <br>
+    <hr>
+    <div class="d-flex justify-content-center h-100">
+        <form class="row g-3 was-validated needs-validation m-4" id="" action="/registrarDevolutivo/" method="post"
+            enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="col-md-4">
+                <label for="cbTipoElemento" class="form-label">Tipo de elemento</label>
+                <select class="form-select" id="cbTipoElemento" name="cbTipoElemento" required value="">
+                    <option selected disabled value="">Seleccione...</option>
+                    {% for tipoElement in tipoElementos %}
+                        <option value="{{tipoElement.0}}">{{tipoElement.0}}</option>
+                    {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                    Selecciona un tipo de elemento.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="txtFechaSena" class="form-label">Fecha inventario SENA</label>
+                <input type="date" class="form-control" id="txtFechaSena" name="txtFechaSena" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa una fecha.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="txtPlacaSena" class="form-label">Placa SENA</label>
+                <input type="text" class="form-control" id="txtPlacaSena" name="txtPlacaSena" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa la placa SENA.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtSerial" class="form-label">Serial</label>
+                <input type="text" class="form-control" id="txtSerial" name="txtSerial" value="">
+                <div class="invalid-feedback">
+                    Por favor, ingresa el código serial.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtMarca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="txtMarca" name="txtMarca" value="">
+                <div class="invalid-feedback">
+                    Por favor, ingresa la marca.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtValorUnitario" class="form-label">Valor unitario</label>
+                <input type="number" class="form-control" id="txtValorUnitario" name="txtValorUnitario" value=""
+                    required>
+                <div class="invalid-feedback">
+                    Por favor, ingres el valor unitario.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="cbEstado" class="form-label">Estado</label>
+                <select class="form-select" id="cbEstado" name="cbEstado" required value="">
+                    <option selected disabled value="">Seleccione...</option>
+                    {% for est in estados %}
+                        <option value="{{est.0}}">{{est.0}}</option>
+                    {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                    Selecciona un estado.
+                </div>
+            </div>
+            <div class="col-mb-3">
+                <label for="txtNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="txtNombre" name="txtNombre" value=""
+                    required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa el nombre.
+                </div>
+            </div>
+            <div class="col-mb-3">
+                <label for="txtDescripcion" class="form-label">Descripción y/o Características</label>
+                <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" rows="3"></textarea>
+                <div class="invalid-feedback">
+                    Por favor, ingresa el nombre.
+                </div>
+                <br>
+            </div>
+            <hr>
+            <div class="text-center m-3">
+                <h4 class="fw-bold">UBICACIÓN</h4>
+            </div>
+            <hr>
+            <br>
+            <div class="col-md-3">
+                <label for="cbDeposito" class="form-label">Deposito</label>
+                <select class="form-select" id="cbDeposito" name="cbDeposito" value="" required>
+                    <option selected disabled value="">Seleccione...</option>
+                    <option value="1">Deposito 1</option>
+                    <option value="2">Deposito 2</option>
+                    <option value="3">Deposito 3</option>
+                    <option value="4">Deposito 4</option>
+                    <option value="5">Deposito 5</option>
+                </select>
+                <div class="invalid-feedback">
+                    Por favor, selecciona un deposito.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtEstante" class="form-label">Estante</label>
+                <input type="number" class="form-control" id="txtEstante" name="txtEstante" value="">
+                <div class="invalid-feedback">
+                    Por favor, ingresa la marca.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtEntrepano" class="form-label">Entrepaño</label>
+                <input type="number" class="form-control" id="txtEntrepano" name="txtEntrepano" value="">
+                <div class="invalid-feedback">
+                    Por favor, ingres el valor unitario.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtLocker" class="form-label">Locker</label>
+                <input type="number" class="form-control" id="txtLocker" name="txtLocker" value="">
+                <div class="invalid-feedback">
+                    Selecciona un estado.
+                </div>
+            </div>
+            <div class="col-mb-3 mt-4">
+                <label for="fileFoto">Foto</label>
+                <input type="file" class="form-control" id="fileFoto" name="fileFoto" accept=".jpg">
+                <div class="invalid-feedback">Por favor, carga una foto.</div>
+            </div>
+            <div class="text-center mt-5">
+                <img class="rounded" id="imagenPersona" src="" alt="" width="300" height="300">
+            </div>
+            <div class="btn-group" role="group" style="width: 50px;">
+                    <button class="btn btn-secondary fw-bold" style="letter-spacing: 2px;">AGREGAR</button>
+                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;">
+                        <a href="/vistaGestionarDevolutivos/" class="text-white">CANCELAR</a>
+                    </button>
+            </div>
+        </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire("Registrar Elementos Devolutivos", '{{mensaje}}', "success")
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire("Registrar Elementos Devolutivos", '{{mensaje}}', "warning")
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
+        <br>
+    </div>
+</div>
+<br>
+{% endblock %}

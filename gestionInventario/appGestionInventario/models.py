@@ -19,10 +19,10 @@ tipoUsuario = [
     ('Aprendiz',"Aprendiz"),('Instructor', 'Instructor'),('Administrativo',"Administrativo"),
 ]
 tipoElemento = [
-    ('HER','Herramientas'),('MAQ','Maquinaria'),('EQU','Equipos'),('MAT','Materiales'),  
+    ('Herramientas','HER'),('Maquinaria','MAQ'),('Equipos','EQU'),('Materiales','MAT'),  
 ]
 estadosElementos = [
-    ('Bueno','Bueno'),('Bueno','Regular'),('Bueno','Malo'),    
+    ('Bueno','Bueno'),('Regular','Regular'),('Malo','Malo'),    
 ]
 estadoSolicitudes = [
     ('Solicitada','Solicitada'),('Aprobada','Aprobada'),('Rechazada','Rechazada'),
@@ -77,7 +77,7 @@ class User(AbstractUser):
 class Elemento(models.Model):
     eleCodigo = models.CharField(max_length=15, unique=True,db_comment="Código único asignado al elemento")    
     eleNombre = models.CharField(max_length=50, db_comment="Nombre del Elemento")    
-    eleTipo = models.CharField(max_length=3, choices=tipoElemento,db_comment="Tipo de Elemento")    
+    eleTipo = models.CharField(max_length=20, choices=tipoElemento,db_comment="Tipo de Elemento")    
     eleEstado = models.CharField(max_length=10,choices=estadosElementos,
                                  db_comment="Estado del elemento devolutivo")    
     fechaHoraCreacion  = models.DateTimeField(auto_now_add=True,db_comment="Fecha y hora del registro")

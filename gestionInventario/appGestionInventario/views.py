@@ -37,6 +37,8 @@ def vistaGestionarUsuarios(request):
     return render(request, "administrador/listarUsuarios.html",retorno)
 
 def registrarUsuario(request):
+    estado = False
+    mensaje = f""
     try:
         nombres = request.POST["txtNombres"]
         apellidos = request.POST["txtApellidos"]
@@ -66,8 +68,9 @@ def registrarUsuario(request):
             user.set_password(passwordGenerado)
             # se actualiza el user
             user.save()
+            estado = True
             mensaje = f"Ususario agregado correctamente"
-            retorno = {"mensaje":mensaje}
+            retorno = {"mensaje":mensaje,"estado":estado}
             # enviar correo al usuario
             asunto = 'Registro Sistema CIES-NEIVA'
             mensaje = f'Cordial saludo, <b>{user.first_name} {user.last_name}</b>, nos permitimos \
@@ -84,7 +87,7 @@ def registrarUsuario(request):
     except Error as error:
         transaction.rollback()
         mensaje = f"{error}"
-    retorno = {"mensaje":mensaje, "user":user}
+    retorno = {"mensaje":mensaje, "user":user, "estado":estado}
     return render(request, "administrado/frmRegistrarUsuario.html", retorno)
 
 def generarPassword():
@@ -165,3 +168,68 @@ def cerrarSesion(request):
 #     # eliminar la sesión actual
 #     request.session.flush()
 #     return redirect("/inicio")
+
+def vistaGestionarDevolutivos(request):
+    if request.user.is_authenticated:
+        elementosDevolutivos = Devolutivo.objects.all()
+        retorno = {"listaElementosDevolutivos":elementosDevolutivos}
+        print(elementosDevolutivos)
+        return render(request, "administrador/listarDevolutivos.html",retorno)
+    else:
+        mensaje = f"Debe iniciar sesión"
+        return render(request, "login.html",{"mensaje":mensaje})
+    
+def vistaRegistrarDevolutivo(request):
+    retorno = {"tipoElementos":tipoElemento,"estados":estadosElementos}
+    print(retorno)
+    return render(request,"administrador/frmRegistrarDevolutivos.html",retorno)
+
+def registrarDevolutivo(request):
+    estado = False
+    mensaje = ""
+    try:
+        placaSena = request.POST["txtPlacaSena"]
+        fechaInventarioSena = request.POST["txtFechaSena"]
+        tipoElemento = request.POST["cbTipoElemento"]
+        serial = request.POST.get("txtserial",False)
+        marca = request.POST.get("txtMarca",False)
+        valorUnitario = int(request.POST["txtValorUnitario"])
+        estado = request.POST["cbEstado"]
+        nombre = request.POST["txtNombre"]
+        descripcion = request.POST["txtDescripcion"]
+        deposito = request.POST["cbDeposito"]
+        estante = request.POST.get("txtEstante",False)
+        entrepano = request.POST.get("txtEntrepano",False)
+        locker = request.POST.get("txtLocker",False)
+        archivo = request.FILES.get("fileFoto",False)
+        
+        with transaction.atomic():
+            # obtener cuantos elementos se han registrado
+            cantidad = Elemento.objects.all().count()
+            # crear un código a partir de la cantidad, ajustando 0 al inicio
+            codigoElemento = tipoElemento.upper() + str(cantidad+1).rjust(6, '0')
+            # crear ele elemento
+            elemento = Elemento(eleCodigo = codigoElemento, eleNombre = nombre,
+                                eleTipo = tipoElemento, eleEstado = estado)
+            # salvar el elemento en la base de datos
+            elemento.save()
+            # crear objeto ubicación física del elemento
+            ubicacion = UbicacionFisica(ubiDeposito = deposito, ubiEstante = estante,
+                                        ubiEntrepano = entrepano, ubiLocker = locker,
+                                        ubiElemento = elemento)
+            # registrar la ubicación fisíca del en la base de datos
+            ubicacion.save()
+            # crear devolutivo
+            elementoDevolutivo = Devolutivo(devPlaca = placaSena, devSerial = serial,
+                                             devDescripcion = descripcion, devMarca = marca,
+                                             devFechaIngresoSena = fechaInventarioSena,
+                                             devValor = valorUnitario, devFoto = archivo, devElemento = elemento)
+            # registrar el elemento en la base de datos
+            elementoDevolutivo.save()
+            estado = True
+            mensaje = f"Elemento Devolutivo registrado satisfactoriamente con el código: {codigoElemento}"
+    except Error as error:
+        transaction.rollback()
+        mensaje = f"Error {error}"
+    retorno = {"mensaje":mensaje,"devolutivo":elementoDevolutivo,"estado":estado}
+    return render(request,"administrador/frmRegistrarDevolutivos.html",retorno)

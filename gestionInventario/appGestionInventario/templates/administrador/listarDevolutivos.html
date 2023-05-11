@@ -1,0 +1,71 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "administrador/menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center h-100 m-5">
+        <a href="/vistaRegistrarDevolutivo/">
+        <button class="btn btn-success rounded fw-bold" style="letter-spacing: 2px;">AGREGAR ELEMENTO</button>
+        </a>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-9">
+            <div class="text-center">
+                <table id="tblElementosDevolutivos" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="7" class="text-white text-center" style="background-color: rgb(89, 181, 72);">GESTIONAR ELEMENTOS DEVOLUTIVOS</th>
+                        </tr>
+                        <tr class="bg-white">
+                            <th>Código propio</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Foto</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        {% for devolutivo in listaElementosDevolutivos %}
+                            <tr>
+                                <td>{{devolutivo.devElemento.eleCodigo}}</td>
+                                <td>{{devolutivo.devElemento.eleNombre}}</td>
+                                <td>{{devolutivo.devDescripcion}}</td>
+                                <td>{{devolutivo.devElemento.eleTipo}}</td>
+                                <td>{{devolutivo.devElemento.eleEstado}}</td>
+                                <td class="text-center">
+                                    <img src="../media/{{devolutivo.devFoto}}" alt="" width="50" height="40">
+                                </td>
+                                <td>
+                                    <a href="/consultarProducto/{{producto.id}}"><i class="fa fa-edit text-warning" title="ver/editar"></i></a>
+                                    <i class="fa fa-trash text-danger" onclick="modalEliminar('{{producto.id}}')"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            {% if mensaje %}
+                <script>
+                        Swal.fire("GESTIÓN ELEMENTOS DEVOLUTIVOS", '{{mensaje}}', "info")
+                </script>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<script>
+    cargarDataTable($("#tblElementosDevolutivos"),"Elementos Devolutivos", 5)
+</script>
+{% endblock %}
