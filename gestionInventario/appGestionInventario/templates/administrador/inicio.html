@@ -9,20 +9,46 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="container" style="justify-content: center; justify-items: center; background-color: rgb(215, 241, 248);">
+<div class="container border mt-5 rounded" style="justify-content: center; justify-items: center;">
     <br>
     <br>
     <div class="d-flex justify-content-center align-items-center" style="height: 80px; ">
-        <h3 class="fw-bold text-center">Modulo  Administrador</h3>
+        <h3 class="fw-bold text-center">Módulo Administrador</h3>
     </div>
     <br>
     <hr>
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <img src="https://blogcomparasoftware-192fc.kxcdn.com/wp-content/uploads/2020/10/Gestion_de_inventarios.png" alt="" srcset="" height="790rem">
+    <br>
+    <br>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        {% load static %}
+        <div class="col-auto">
+            <button class="btn">
+                <a href="/vistaGestionarUsuarios/" class="text-dark">
+                    <img src="{% static '../static/images/new_user.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Gestionar usuarios</p>
+                </a>
+            </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn">
+                <a href="#" class="text-dark">
+                    <img src="{% static '../static/images/solicitudes.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Gestionar solicitudes</p>
+                </a>
+            </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn">
+                <a href="#" class="text-dark">
+                    <img src="{% static '../static/images/reportes.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Reportes</p>
+                </a>
+            </button>
+        </div>
     </div>
+    <br>
+    <br>
 </div>
-{% endblock %}
-
-{% block piePagina %}
-    {% include "piePagina.html" %}
+<br>
+<br>
 {% endblock %}

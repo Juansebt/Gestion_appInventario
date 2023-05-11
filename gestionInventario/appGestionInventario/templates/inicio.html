@@ -9,20 +9,32 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="container" style="justify-content: center; justify-items: center;">
+<div class="container border mt-5 rounded" style="justify-content: center; justify-items: center;">
     <br>
     <br>
     <div class="d-flex justify-content-center align-items-center" style="height: 80px; ">
-        <h3 class="fw-bold text-center">Bienvenidos al sistema de invenrario - CIES</h3>
+        <h3 class="fw-bold text-center">Bienvenidos al sistema de gestión de inventario - CIES</h3>
     </div>
     <br>
     <hr>
+    <br>
+    <br>
     <div class="d-flex justify-content-center align-items-center h-100">
-        <img src="https://blogcomparasoftware-192fc.kxcdn.com/wp-content/uploads/2020/10/Gestion_de_inventarios.png" alt="" srcset="" height="790rem">
+        {% load static %}
+        <img src="{% static '../static/images/fondo_inicio.png' %}" alt="" srcset="" height="300rem">
     </div>
+    <br>
+    <br>
 </div>
-{% endblock %}
-
-{% block piePagina %}
-    {% include "piePagina.html" %}
+<footer>
+    <div class="text-white w-100">
+        <div class="container">
+            <div class="footer" style="margin-top: 3vh;">
+                <div class="text-center">
+                    <p class="text-dark fw-bold" id="pFooter" style="font-size: 2.5vh;">Created by: Juan Sebastián Laguna Yara <br>Todos los derechos reservados a ADSO 2468288 - 2023&copy;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 {% endblock %}

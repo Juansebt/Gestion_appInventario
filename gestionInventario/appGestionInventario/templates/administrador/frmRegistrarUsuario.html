@@ -8,9 +8,9 @@
     {% include "administrador/menu.html" %}
 {% endblock %}
 {% block contenido %}
-<div class="m-4 border rounded">
+<div class="m-5 border rounded">
     <div class="mt-5 text-center">
-        <h4>REGISTRAR USUARIO</h4>
+        <h4 class="fw-bold">REGISTRAR USUARIO</h4>
     </div>
     <br>
     <hr>
@@ -74,16 +74,12 @@
             </div>
             <div class="btn-group" role="group" style="width: 50px;">
                     <button class="btn btn-secondary fw-bold" style="letter-spacing: 2px;">AGREGAR</button>
-                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;" disabled>CANCELAR</button>
+                    <button class="btn btn-danger fw-bold" style="letter-spacing: 2px;">
+                        <a href="/vistaGestionarUsuarios/" class="text-white">CANCELAR</a></button>
             </div>
         </form>
         <br>
     </div>
 </div>
-
-
-{% endblock %}
-
-{% block piePagina %}
-    {% include "piePagina.html" %}
+<br>
 {% endblock %}

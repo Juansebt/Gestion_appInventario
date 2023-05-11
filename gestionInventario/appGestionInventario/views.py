@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from appGestionInventario.models import *
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.contrib import auth
 from django.conf import settings
 from smtplib import SMTPException
@@ -156,3 +156,12 @@ def enviarCorreo(asunto=None,mensaje=None,destinatario=None):
         correo.send(fail_silently=True)
     except SMTPException as error:
         print(error)
+        
+def cerrarSesion(request):
+    logout(request)
+    return redirect("/inicio")
+
+# def cerrarSesion(request):
+#     # eliminar la sesión actual
+#     request.session.flush()
+#     return redirect("/inicio")

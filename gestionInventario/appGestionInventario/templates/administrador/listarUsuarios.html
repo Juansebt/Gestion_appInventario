@@ -5,20 +5,16 @@
 {% endblock %}
 
 {% block menu %}
-    {% include "menu.html" %}
+    {% include "administrador/menu.html" %}
 {% endblock %}
 
 {% block contenido %}
 <div class="container">
-    <br>
-    <br>
-    <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="d-flex justify-content-center align-items-center h-100 m-5">
         <a href="/vistaRegistrarUsuario/">
-        <button class="btn btn-success rounded-pill mb-2 fw-bold" style="letter-spacing: 2px;">AGREGAR USUARIO</button>
+        <button class="btn btn-success rounded fw-bold" style="letter-spacing: 2px;">AGREGAR USUARIO</button>
         </a>
     </div>
-    <br>
-    <br>
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-9">
             <div class="text-center">
@@ -63,8 +59,6 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block piePagina %}
-    {% include "piePagina.html" %}
+<br>
+<br>
 {% endblock %}

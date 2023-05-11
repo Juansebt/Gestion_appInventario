@@ -5,23 +5,21 @@
 
 header {
   width: 100%;
-  height: 30vh;
-  background-color: rgb(89, 181, 72);
+  height: 35vh;
+  background-color: white;
 }
 
 nav {
   width: 100%;
-  height: 15vh;
-  background-color: rgb(35, 130, 118);
+  height: 11vh;
+  background-color: rgb(89, 181, 72);
   font-weight: bold;
 }
 
 section {
   width: 100%;
-  height: 60rem;
-  /* background-color: rgb(215, 241, 248); */
+  height: auto;
   background-color: white;
-  height: 61rem;
 }
 
 footer {
@@ -30,7 +28,7 @@ footer {
   display: flex;
   height: 20vh;
   justify-content: center;
-  background-color: rgb(89, 181, 72);
+  background-color: white;
 }
 
 #title {
@@ -40,10 +38,10 @@ footer {
   margin-top: 30px;
 }
 
-#pFooter {
+/* #pFooter {
   font-family: "Zurich Ublk EX BT";
   font-size: 15px;
-}
+} */
 
 /* .menu-title {
       font-family: "Zurich Ublk EX BT";
