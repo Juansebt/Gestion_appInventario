@@ -220,9 +220,9 @@ def registrarDevolutivo(request):
             # registrar la ubicación fisíca del en la base de datos
             ubicacion.save()
             # crear devolutivo
-            elementoDevolutivo = Devolutivo(devPlaca = placaSena, devSerial = serial,
+            elementoDevolutivo = Devolutivo(devPlacaSena = placaSena, devSerial = serial,
                                              devDescripcion = descripcion, devMarca = marca,
-                                             devFechaIngresoSena = fechaInventarioSena,
+                                             devFechaIngresoSENA = fechaInventarioSena,
                                              devValor = valorUnitario, devFoto = archivo, devElemento = elemento)
             # registrar el elemento en la base de datos
             elementoDevolutivo.save()

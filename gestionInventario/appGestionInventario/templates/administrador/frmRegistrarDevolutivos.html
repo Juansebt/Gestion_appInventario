@@ -23,7 +23,7 @@
                 <select class="form-select" id="cbTipoElemento" name="cbTipoElemento" required value="">
                     <option selected disabled value="">Seleccione...</option>
                     {% for tipoElement in tipoElementos %}
-                        <option value="{{tipoElement.0}}">{{tipoElement.0}}</option>
+                        <option value="{{tipoElement.0}}">{{tipoElement.1}}</option>
                     {% endfor %}
                 </select>
                 <div class="invalid-feedback">
@@ -71,7 +71,7 @@
                 <select class="form-select" id="cbEstado" name="cbEstado" required value="">
                     <option selected disabled value="">Seleccione...</option>
                     {% for est in estados %}
-                        <option value="{{est.0}}">{{est.0}}</option>
+                        <option value="{{est.0}}">{{est.1}}</option>
                     {% endfor %}
                 </select>
                 <div class="invalid-feedback">
