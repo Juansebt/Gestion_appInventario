@@ -1,4 +1,6 @@
 $(function () {
+  // $("#tblUsuarios").DataTable();
+  // $("#tblElementosDevolutivos").DataTable();
   $("#fileFoto").on("change", validarImagen);
   $("#fileFoto").on("change", mostrarImagen);
 })

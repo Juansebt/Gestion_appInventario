@@ -12,7 +12,7 @@
 <div class="container">
     <div class="d-flex justify-content-center align-items-center h-100 m-5">
         <a href="/vistaRegistrarUsuario/">
-        <button class="btn btn-success rounded fw-bold" style="letter-spacing: 2px;">AGREGAR USUARIO</button>
+        <button class="btn btn-success rounded fw-bold" style="letter-spacing: 2px; background-color: rgb(89, 181, 72);">AGREGAR USUARIO</button>
         </a>
     </div>
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -61,4 +61,7 @@
 </div>
 <br>
 <br>
+<script>
+    cargarDataTable($("#tblUsuarios"),"USUARIOS", 3)
+</script>
 {% endblock %}
