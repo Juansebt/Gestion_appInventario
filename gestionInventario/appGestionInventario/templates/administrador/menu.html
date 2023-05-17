@@ -1,31 +1,25 @@
 <div class="container-fluid">
-  <a class="navbar-brand" href="/inicioAdministrador/" style="margin: 17px; padding-right: 6px;">Administrador</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <!-- <a class="navbar-brand" href="/inicioAdministrador/" style="margin: 17px; padding-right: 6px;">Administrador</a> -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="vr"></div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 13px;">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item dropdown" style="margin-right: 20px;">
+        <select name="cbRolMenu" id="cbRolMenu" class="form-control custom-select text-center">
+          <option value="Administrador" selected>Administrador</option>
+          <option value="Asistente">Asistente</option>
+          <option value="Instructor">Instructor</option>
+        </select>
+      </li>
+      <div class="vr"></div>
       <li class="nav-item">
         <a class="nav-link text-white" href="/vistaGestionarUsuarios/">Gestionar usuarios</a>
       </li>
       <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle text-white"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
           Gestionar elementos
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

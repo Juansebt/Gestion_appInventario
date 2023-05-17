@@ -3,6 +3,16 @@ $(function () {
   // $("#tblElementosDevolutivos").DataTable();
   $("#fileFoto").on("change", validarImagen);
   $("#fileFoto").on("change", mostrarImagen);
+  $("#cbRolMenu").change(function(){
+    alert("Holaa");
+    if($("#cbRolMenu").val()=="Instructor"){
+      location.href="/inicioInstructor/";
+    }else if($("#cbRolMenu").val()=="Administrador"){
+      location.href="/inicioAdministrador/";
+    }else{
+      location.href="/inicioAsistente/";
+    }
+  })
 })
 
 function modalEliminar(idProducto) {
