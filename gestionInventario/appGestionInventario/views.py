@@ -88,7 +88,7 @@ def registrarUsuario(request):
         transaction.rollback()
         mensaje = f"{error}"
     retorno = {"mensaje":mensaje, "user":user, "estado":estado}
-    return render(request, "administrado/frmRegistrarUsuario.html", retorno)
+    return render(request, "administrador/frmRegistrarUsuario.html", retorno)
 
 def generarPassword():
     longitud = 10
@@ -140,6 +140,13 @@ def login(request):
 def inicioAdministrador(request):
     if request.user.is_authenticated:
         return render(request,"administrador/inicio.html")
+    else:
+        retorno = {"mensaje":"Debe ingresar con sus credenciales"}
+        return render(request,"login.html",retorno)
+    
+def inicioAsistente(request):
+    if request.user.is_authenticated:
+        return render(request,"asistente/inicio.html")
     else:
         retorno = {"mensaje":"Debe ingresar con sus credenciales"}
         return render(request,"login.html",retorno)

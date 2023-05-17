@@ -33,6 +33,7 @@ urlpatterns = [
     path('vistaGestionarDevolutivos/', views.vistaGestionarDevolutivos),
     path('vistaRegistrarDevolutivo/', views.vistaRegistrarDevolutivo),
     path('registrarDevolutivo/',views.registrarDevolutivo),
+    path('inicioAsistente/', views.inicioAsistente),
 ]
 
 #Para poder tener acceso a la carpeta media y poder ver las fotos
