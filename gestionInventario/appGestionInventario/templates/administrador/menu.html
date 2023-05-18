@@ -6,15 +6,15 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 13px;">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown" style="margin-right: 20px;">
-        <select name="cbRolMenu" id="cbRolMenu" class="form-control custom-select text-center">
+      <li class="nav-item dropdown" style="margin-right: 17px;">
+        <select name="cbRolMenu" id="cbRolMenu" class="form-control custom-select text-center" style="width: 20vh;">
           <option value="Administrador" selected>Administrador</option>
           <option value="Asistente">Asistente</option>
           <option value="Instructor">Instructor</option>
         </select>
       </li>
       <div class="vr"></div>
-      <li class="nav-item">
+      <li class="nav-item mx-2">
         <a class="nav-link text-white" href="/vistaGestionarUsuarios/">Gestionar usuarios</a>
       </li>
       <li class="nav-item dropdown">
@@ -30,9 +30,17 @@
       <li class="nav-item">
         <a class="nav-link text-white" href="#">Gestionar solicitudes</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/cerrarSesion/" style="color: black;">Salir</a>
+      <li class="nav-item mx-2">
+        <a class="nav-link text-dark" href="/cerrarSesion/">Salir</a>
       </li>
+      <!-- <li class="nav-item mx-2">
+        <a class="nav-link text-white" href="#">{{user.username}}</a>
+      </li> -->
     </ul>
+    <span class="navbar-text text-white" style="margin-right: 10px;">
+      <a class="navbar-brand" href="#">
+        <img src="../media/{{user.userFoto}}" width="40" height="40" alt="" style="border-radius: 50%;">
+      </a>{{user.username}}
+    </span>
   </div>
 </div>

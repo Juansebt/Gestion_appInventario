@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib import auth
 from django.conf import settings
 from smtplib import SMTPException
+from django import forms
 import threading
 import urllib
 import json
@@ -101,6 +102,9 @@ def generarPassword():
 def vistaLogin(request):
     return render(request,"login.html")
 
+# class LoginForm(forms.Form):
+#     password = forms.CharField(widget=forms.PasswordInput())
+
 def login(request):
     # validar recaptcha
     """ Begin reCAPTCHA validation """
@@ -151,6 +155,13 @@ def inicioAsistente(request):
         retorno = {"mensaje":"Debe ingresar con sus credenciales"}
         return render(request,"login.html",retorno)
     
+def inicioInstructor(request):
+    if request.user.is_authenticated:
+        return render(request,"instructor/inicio.html")
+    else:
+        retorno = {"mensaje":"Debe ingresar con sus credenciales"}
+        return render(request,"login.html",retorno)
+
 def enviarCorreo(asunto=None,mensaje=None,destinatario=None):
     remitente = settings.EMAIL_HOST_USER
     template = get_template('enviarCorreo.html')

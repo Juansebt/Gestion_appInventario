@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "instructor/menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container border mt-5 rounded" style="justify-content: center; justify-items: center;">
+    <br>
+    <br>
+    <div class="d-flex justify-content-center align-items-center" style="height: 80px; ">
+        <h3 class="fw-bold text-center">Módulo Instructor</h3>
+    </div>
+    <br>
+    <!-- <hr>
+    <br>
+    <br> -->
+    <!-- <div class="row d-flex justify-content-center align-items-center h-100">
+        {% load static %}
+        <div class="col-auto">
+            <button class="btn">
+                <a href="/vistaGestionarUsuarios/" class="text-dark">
+                    <img src="{% static '../static/images/new_user.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Gestionar usuarios</p>
+                </a>
+            </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn">
+                <a href="#" class="text-dark">
+                    <img src="{% static '../static/images/solicitudes.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Gestionar solicitudes</p>
+                </a>
+            </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn">
+                <a href="#" class="text-dark">
+                    <img src="{% static '../static/images/reportes.png' %}" alt="" srcset="" height="250rem">
+                    <p style="font-size: 18px;">Reportes</p>
+                </a>
+            </button>
+        </div>
+    </div> -->
+    <!-- <br> -->
+    <br>
+</div>
+<br>
+<br>
+{% endblock %}

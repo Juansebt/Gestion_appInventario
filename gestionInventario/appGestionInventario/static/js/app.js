@@ -4,7 +4,6 @@ $(function () {
   $("#fileFoto").on("change", validarImagen);
   $("#fileFoto").on("change", mostrarImagen);
   $("#cbRolMenu").change(function(){
-    alert("Holaa");
     if($("#cbRolMenu").val()=="Instructor"){
       location.href="/inicioInstructor/";
     }else if($("#cbRolMenu").val()=="Administrador"){
@@ -58,13 +57,13 @@ function mostrarImagen(evt) {
   $("#imagenPersona").attr("src", url)
 }
 
-function verContrasena(boton) {
-  var tipo = document.getElementById("txtPassword");
-  if (tipo.type == "password") {
-    tipo.type = "text";
-    boton.innerText = "Ocultar contraseña";
-  } else {
-    tipo.type = "password";
-    boton.innerText = "Mostrar contraseña";
-  }
-}
+// function verContrasena(boton) {
+//   var tipo = document.getElementById("txtPassword");
+//   if (tipo.type == "password") {
+//     tipo.type = "text";
+//     boton.innerText = "Ocultar contraseña";
+//   } else {
+//     tipo.type = "password";
+//     boton.innerText = "Mostrar contraseña";
+//   }
+// }
