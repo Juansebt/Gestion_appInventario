@@ -78,8 +78,8 @@ def registrarUsuario(request):
                 informarle que usted ha sido registrado en el sistema de Gestión de Inventarios \
                 del centro de la industria, la empresa y los servicios CIES de la ciudad de Neiva.\
                     No permitimos enviarle las credenciales de ingreso a nuestro sistema.<br>\
-                    <br><b>USERNAME:<\b> {user.username}\
-                    <br><b>PASSWORD:<\b> {passwordGenerado}\
+                    <br><b>USERNAME: {user.username}\
+                    <br><b>PASSWORD: {passwordGenerado}\
                     <br><br>Lo invitamos a ingresar al sistema en la url:\
                     https://gestioninventario.sena.edu.co.'
             threa = threading.Thread(target=enviarCorreo, args=(asunto,mensaje,user.email))
@@ -180,12 +180,9 @@ def enviarCorreo(asunto=None,mensaje=None,destinatario=None):
         
 def cerrarSesion(request):
     logout(request)
+    # eliminar la sesión actual
+    request.session.flush()
     return redirect("/inicio")
-
-# def cerrarSesion(request):
-#     # eliminar la sesión actual
-#     request.session.flush()
-#     return redirect("/inicio")
 
 def vistaGestionarDevolutivos(request):
     if request.user.is_authenticated:
