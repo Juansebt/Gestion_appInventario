@@ -318,7 +318,7 @@ def registrarEntradaMaterial(request):
                 proveedor  = Proveedor.objects.get(pk=idProveedor)
                 entradaMaterial = EntradaMaterial(entNumeroFactura = codigoFactura, entFechaHora = fechaHora,
                                                   entUsuarioRecibe = userRecibe, entEntregadoPor = entregadoPor,
-                                                  entProovedor = proveedor, entObservaciones = observaciones)
+                                                  entProveedor = proveedor, entObservaciones = observaciones)
                 entradaMaterial.save()
                 detalleMateriales = json.loads(request.POST["detalle"])
                 for detalle in detalleMateriales:

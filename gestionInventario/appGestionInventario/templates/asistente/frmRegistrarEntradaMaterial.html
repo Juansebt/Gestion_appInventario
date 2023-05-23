@@ -18,35 +18,42 @@
         <script> cargarUnidadesMedida("{{unidad.id}}","{{unidad.uniNombre}}");</script>
     {% endfor %}
    
-    <h3 class="text-center fw-bold">REGISTRAR ENTRADA DE MATERIALES</h3>
     <div class="principal" style="width: 100%;">                   
-        <div id="datosGenerales">
-            <div class="form-group row">
-                
-                <div class="col-lg-2 mb-3">                                    
-                    <label for="txtFactura" class="fw-bold">Código Factura:</label>
+        <div id="datosGenerales" class="m-5 border rounded">
+            <div class="mt-5 mb-5 text-center">
+                <h3 class="fw-bold">REGISTRAR ENTRADA DE MATERIALES</h3>
+            </div>
+            <hr>
+            <form action="" id="frmDatosGenerales">
+            <div class="form-group row m-4">
+                <div class="mb-3 col-lg-3">                                    
+                    <label for="txtFactura" class="form-label">Código factura</label>
                     <input type="number" name="txtFactura" value="1" id="txtFactura" class="form-control" required>           
                 </div> 
-                <div class="col-lg-6 mb-3">
-                    <label for="txtEntregadoPor" class="fw-bold">Entregado Por:</label>
+                <div class="mb-3 col-lg-3">
+                    <label for="txtEntregadoPor" class="form-label">Entregado por</label>
                     <input type="text" name="txtEntregadoPor" id="txtEntregadoPor" class="form-control" required> 
                 </div>
-                <div class="col-lg-4 mb-3">
-                    <label for="cbProveedor" class="fw-bold">Proveedor:</label>
+                <div class="mb-3 col-lg-3">
+                    <label for="cbProveedor" class="form-label">Proveedor</label>
                     <select name="cbProveedor" id="cbProveedor" class="form-select">
-                        <option value="">Seleccione</option>
+                        <option value="">Seleccione...</option>
                         {% for proveedor in proveedores %}
                             <option value="{{proveedor.id}}">{{proveedor.proNombre}}</option>
                         {% endfor %}
                     </select>
-                </div>                                                              
+                </div>  
+                <div class="mb-3 col-lg-3">
+                    <label for="txtFecha" class="form-label">Fecha entrega</label>
+                    <input type="datetime-local" name="txtFecha" id="txtFecha" class="form-control"> 
+                </div>                                                            
             </div>   
-            <div class="form-group row">                                
+            <div class="form-group row m-4">                                
                 
                 <div class="col-lg-12 mb-3">
-                    <label for="cbRecibidoPor" class="fw-bold">Recibido Por:</label>
+                    <label for="cbRecibidoPor" class="form-label">Recibido por</label>
                     <select name="cbRecibidoPor" id="cbRecibidoPor" class="form-select">
-                        <option value="">Seleccione</option>
+                        <option value="">Seleccione...</option>
                         {% for usuario in usuarios %}
                            {% if usuario.username != 'admin' %}
                             <option value="{{usuario.id}}">{{usuario.first_name}} {{usuario.last_name}}</option>
@@ -55,19 +62,22 @@
                     </select>
                 </div>
             </div>  
-            <div class="form-group">                        
+            <div class="form-group m-4" style="padding-left: 15px;">                        
                 <button type="button" id="btnAbrirModalAnexarMaterial" class="btn btn-secondary" 
                 data-bs-toggle="modal" data-bs-target="#modalMaterial">
-                    Anexar Material
+                    Anexar material
                   </button>     
             </div>
         </div>
-        <hr class="text-secondary fw-bold">
-        <h3 class="text-center fw-bold">Detalle Entrada Materiales</h3>
+        </form>
+        <br>
         <div id="vistaTablaMateriales w-75 table-responsive" style="margin: 0 auto">
-            <table class="table table-bordered table-stripped">
+            <table class="table table-bordered table-stripped" id="tblEntradaMaterial">
                 <thead>
-                    <tr class="bg-secondary text-white text-center">
+                    <tr>
+                        <th colspan="7" class="text-white text-center" style="background-color: rgb(89, 181, 72);">DETALLE ENTRADA MATERIALES</th>
+                    </tr>
+                    <tr class="text-dark text-center">
                         <th>Código</th>
                         <th>Material</th>
                         <th>Cantidad</th>
@@ -85,7 +95,7 @@
         </div>
 
         <div class="text-center">
-            <button class="btn btn-secondary mt-5" id="btnRegistrarDetalle" style="margin: 0 auto">Finalizar Registro</button> 
+            <button class="btn mt-5 text-white fw-bold" id="btnRegistrarDetalle" style="margin: 0 auto; background-color: rgb(89, 181, 72); letter-spacing: 2px;">FINALIZAR REGISTRO</button> 
         </div>                      
         
         <!-- The Modal -->
@@ -95,7 +105,7 @@
         
                 <!-- Modal Header -->
                 <div class="modal-header tituloModal">
-                    <h4 class="modal-title">Entrada Material</h4>
+                    <h4 class="modal-title">ENTRADA MATERIAL</h4>
                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
                 </div>
         
@@ -104,9 +114,9 @@
                     <form id="frmEntradaMaterial" action="">
                         <div class="form-group row">                                                          
                             <div class="col-lg-12 mb-3">                                    
-                                <label for="cbMaterial" class="fw-bold">Material:</label>
+                                <label for="cbMaterial" class="form-label">Material</label>
                                 <select name="cbMaterial" id="cbMaterial" class="form-select">
-                                    <option value="">Seleccione</option>
+                                    <option value="">Seleccione...</option>
                                     {% for material in materiales %}
                                         <option value="{{material.id}}">{{material.matElemento.eleCodigo}}-{{material.matElemento.eleNombre}}</option>
                                     {% endfor %}
@@ -127,25 +137,26 @@
                         </div>  
                         <div class="form-group row">
                             <div class="col-lg-3 mb-3">
-                                <label for="txtCantidad" class="fw-bold">Cantidad:</label>
+                                <label for="txtCantidad" class="form-label">Cantidad</label>
                                 <input type="number" name="txtCantidad" id="txtCantidad" class="form-control">      
                             </div>
                             <div class="col-lg-3 mb-3">                                   
-                                <label for="txtPrecio" class="fw-bold">Precio Unitario:</label>
+                                <label for="txtPrecio" class="form-label">Precio unitario</label>
                                 <input type="number" name="txtPrecio" id="txtPrecio" class="form-control">                        
                             </div> 
                             <div class="col-lg-3 mb-3">
-                                <label for="cbUnidadMedida" class="fw-bold">Unidad:</label>
+                                <label for="cbUnidadMedida" class="form-label">Unidad</label>
                                 <select name="cbUnidadMedida" id="cbUnidadMedida" class="form-select">
-                                    <option value="">Seleccione</option>
+                                    <option value="" selected disabled>Seleccione...</option>
                                     {% for unidad in unidadesMedida %}
                                         <option value="{{unidad.id}}">{{unidad.uniNombre}}</option>
                                     {% endfor %}
                                 </select>                           
                             </div>
                             <div class="col-lg-3 mb-3">
-                                <label for="cbEstado" class="fw-bold">Estado:</label>
+                                <label for="cbEstado" class="form-label">Estado</label>
                                 <select name="cbEstado" id="cbEstado" class="form-select">
+                                    <option value="" selected disabled>Seleccione...</option>
                                     <option value="Bueno">Bueno</option>
                                     <option value="Regular">Regular</option>
                                     <option value="Malo">Malo</option>
@@ -155,7 +166,7 @@
                         </div>                                       
                         <div class="form-group row">                                             
                             <div class="col-lg-12 mb-3">
-                                <label for="txtObservaciones" class="fw-bold">Observaciones:</label>
+                                <label for="txtObservaciones" class="form-label">Observaciones</label>
                                 <textarea name="txtObservaciones" id="txtObservaciones" cols="30" rows="5" class="form-control" ></textarea>
                             </div>
                         </div>
@@ -164,7 +175,7 @@
         
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" id="btnAgregarMaterialDetalle" data-bs-dismiss="modal">Add Detalle</button>
+                    <button class="btn text-white" id="btnAgregarMaterialDetalle" data-bs-dismiss="modal" style="background-color: rgb(89, 181, 72);">Add Detalle</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
         

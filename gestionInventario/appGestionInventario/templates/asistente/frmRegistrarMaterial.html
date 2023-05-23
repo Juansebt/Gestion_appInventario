@@ -24,11 +24,11 @@
                 </div>
             </div>
             <div class="mb-3 col-lg-4">
-                <label for="txtMarca" class="form-label">Marca:</label>
+                <label for="txtMarca" class="form-label">Marca</label>
                 <input type="text" name="txtMarca" id="txtMarca" class="form-control">
             </div>
             <div class="mb-3 col-lg-4">
-                <label for="cbEstado" class="form-label">Estado:</label>
+                <label for="cbEstado" class="form-label">Estado</label>
                 <select name="cbEstado" id="cbEstado" class="form-select" required>
                     <option selected disabled value="">Seleccione...</option>
                     < {% for estado in estados %} <option value="{{estado.0}}">{{estado.1}}</option>

@@ -18,7 +18,7 @@ $(function(){
         vistaEntradaMaterial();
     })
 
-    $("btnRegistrarDetalle").click(function(){
+    $("#btnRegistrarDetalle").click(function(){
         registroDetalleEntrada();
     })
 })
@@ -116,11 +116,12 @@ function mostrarDatosTabla() {
         posU = unidadesMedida.findIndex(unidad=>unidad.id == entrada.idUnidadMedida);
         datos += "<tr>";
         datos += "<td class='text-center'>" + materiales[posM].codigo + "</td>";
-        datos += "<td>" + materiales[posM].nombre + "</td>";
+        datos += "<td class='text-center'>" + materiales[posM].nombre + "</td>";
         datos += "<td class='text-center'>" + entrada.cantidad + "</td>";
-        datos += "<td class='text-end'>" + "$ " + entrada.precio + ".00" + "</td>";
-        datos += "<td>" + unidadesMedida[posU].nombre + "</td>";
+        datos += "<td class='text-center'>" + "$ " + entrada.precio + ".00" + "</td>";
+        datos += "<td class='text-center'>" + unidadesMedida[posU].nombre + "</td>";
         datos += "<td class='text-center'>" + entrada.estado + "</td>";
+        datos += "<td class='text-center'>" + entrada.observaciones + "</td>";
         datos += "</tr>";
     })
     // agregar a la tabla con id datosTablaMateriales
@@ -150,7 +151,7 @@ function cargarMateriales(idMaterial, codigo, nombre) {
  * @param {*} id 
  * @param {*} nombre 
  */
-function cargarMateriales(id, nombre) {
+function cargarUnidadesMedida(id, nombre) {
     const unidadMedida = {
         "id":id,
         "nombre":nombre,
