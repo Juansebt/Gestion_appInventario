@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block menu %}
-    {% include "administrador/menu.html" %}
+    {% include "asistente/menu.html" %}
 {% endblock %}
 {% block contenido %}
 <div class="m-5 border rounded">
@@ -116,21 +116,21 @@
             </div>
             <div class="col-md-3">
                 <label for="txtEstante" class="form-label">Estante</label>
-                <input type="number" class="form-control" id="txtEstante" name="txtEstante" value="">
+                <input type="number" class="form-control" id="txtEstante" name="txtEstante" value="0">
                 <div class="invalid-feedback">
                     Por favor, ingresa la marca.
                 </div>
             </div>
             <div class="col-md-3">
                 <label for="txtEntrepano" class="form-label">Entrepaño</label>
-                <input type="number" class="form-control" id="txtEntrepano" name="txtEntrepano" value="">
+                <input type="number" class="form-control" id="txtEntrepano" name="txtEntrepano" value="0">
                 <div class="invalid-feedback">
                     Por favor, ingres el valor unitario.
                 </div>
             </div>
             <div class="col-md-3">
                 <label for="txtLocker" class="form-label">Locker</label>
-                <input type="number" class="form-control" id="txtLocker" name="txtLocker" value="">
+                <input type="number" class="form-control" id="txtLocker" name="txtLocker" value="0">
                 <div class="invalid-feedback">
                     Selecciona un estado.
                 </div>

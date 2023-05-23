@@ -1,0 +1,135 @@
+{% extends "index.html" %}
+{% block encabezado %}
+{% include "encabezado.html" %}
+{%endblock %}
+{% block menu %}
+{% include "asistente/menu.html" %}
+{%endblock %}
+{% block contenido %}
+<div class="m-5 border rounded">
+    <div class="mt-5 text-center">
+        <h4 class="fw-bold">REGISTRAR MATERIAL DE CONSUMO</h4>
+    </div>
+    <br>
+    <hr>
+    <div class="d-flex justify-content-center h-100">
+        <form class="row g-3 was-validated needs-validation m-4" id="frmRegistrarMaterial" action="/registrarMaterial/" method="post"
+            enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="mb-3 col-lg-4">
+                <label for="txtNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="txtNombre" name="txtNombre" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa el nombre.
+                </div>
+            </div>
+            <div class="mb-3 col-lg-4">
+                <label for="txtMarca" class="form-label">Marca:</label>
+                <input type="text" name="txtMarca" id="txtMarca" class="form-control">
+            </div>
+            <div class="mb-3 col-lg-4">
+                <label for="cbEstado" class="form-label">Estado:</label>
+                <select name="cbEstado" id="cbEstado" class="form-select" required>
+                    <option selected disabled value="">Seleccione...</option>
+                    < {% for estado in estados %} <option value="{{estado.0}}">{{estado.1}}</option>
+                        {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                    Selecciona un estado.
+                </div>
+            </div>
+            <div class="col-mb-3">
+                <label for="txtDescripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" rows="5"></textarea>
+                <div class="invalid-feedback">
+                    Por favor, ingresa el nombre.
+                </div>
+                <br>
+            </div>
+            <hr>
+            <div class="text-center m-3">
+                <h4 class="fw-bold">UBICACIÓN</h4>
+            </div>
+            <hr>
+            <br>
+            <div class="col-md-3">
+                <label for="cbDeposito" class="form-label">Deposito</label>
+                <select class="form-select" id="cbDeposito" name="cbDeposito" value="" required>
+                    <option selected disabled value="">Seleccione...</option>
+                    <option value="1">Deposito 1</option>
+                    <option value="2">Deposito 2</option>
+                    <option value="3">Deposito 3</option>
+                    <option value="4">Deposito 4</option>
+                    <option value="5">Deposito 5</option>
+                </select>
+                <div class="invalid-feedback">
+                    Por favor, selecciona un deposito.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtEstante" class="form-label">Estante</label>
+                <input type="number" class="form-control" id="txtEstante" name="txtEstante" value="0">
+                <div class="invalid-feedback">
+                    Por favor, ingresa la marca.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtEntrepano" class="form-label">Entrepaño</label>
+                <input type="number" class="form-control" id="txtEntrepano" name="txtEntrepano" value="0">
+                <div class="invalid-feedback">
+                    Por favor, ingres el valor unitario.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="txtLocker" class="form-label">Locker</label>
+                <input type="number" class="form-control" id="txtLocker" name="txtLocker" value="0">
+                <div class="invalid-feedback">
+                    Selecciona un estado.
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="btn-group pt-3 pb-3" role="group" style="width: 50px;">
+                <button class="btn btn-secondary fw-bold" style="letter-spacing: 2px;">AGREGAR</button>
+            </div>
+        </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire({
+                            title: 'Registro Material',
+                            text: '{{mensaje}}',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //let formulario = document.getElementById('frmRegistrarDevolutivo');
+                                //formulario.reset();
+                                location.href = "/vistaRegistrarMaterial/"
+                            }
+                        });
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire({
+                            title: 'Registro Material',
+                            text: '{{mensaje}}',
+                            icon: 'warning',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        })
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
+        <br>
+    </div>
+</div>
+<br>
+{%endblock %}

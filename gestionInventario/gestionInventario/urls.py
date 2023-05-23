@@ -35,6 +35,10 @@ urlpatterns = [
     path('registrarDevolutivo/',views.registrarDevolutivo),
     path('inicioAsistente/', views.inicioAsistente),
     path('inicioInstructor/', views.inicioInstructor),
+    path('vistaRegistrarMaterial/', views.vistaRegistrarMaterial),
+    path('registrarMaterial/', views.registrarMaterial),
+    path('vistaEntradaMaterial/', views.vistaEntradaMaterial),
+    path('registrarEntradaMaterial/', views.registrarEntradaMaterial),
 ]
 
 #Para poder tener acceso a la carpeta media y poder ver las fotos
