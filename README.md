@@ -13,6 +13,7 @@ diferentes elementos que componen el inventario. Es importante que cuando se reg
 los elementos el sistema tenga la capacidad de registrar la ubicación de los mismos. Hay
 una bodega o deposito que cuenta con estantes y cada uno de esos estante tiene 4
 entrepaños.</p>
+
 ###
 
 >By: Juan Sebastián Laguna Yara - ADSO 2023©
