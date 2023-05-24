@@ -111,12 +111,12 @@
         
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="frmEntradaMaterial" action="">
+                    <form id="frmEntradaMaterial" action="" class="m-3">
                         <div class="form-group row">                                                          
                             <div class="col-lg-12 mb-3">                                    
                                 <label for="cbMaterial" class="form-label">Material</label>
                                 <select name="cbMaterial" id="cbMaterial" class="form-select">
-                                    <option value="">Seleccione...</option>
+                                    <option value="" selected disabled>Seleccione...</option>
                                     {% for material in materiales %}
                                         <option value="{{material.id}}">{{material.matElemento.eleCodigo}}-{{material.matElemento.eleNombre}}</option>
                                     {% endfor %}
@@ -174,7 +174,7 @@
                 </div>
         
                 <!-- Modal footer -->
-                <div class="modal-footer">
+                <div class="modal-footer m-3">
                     <button class="btn text-white" id="btnAgregarMaterialDetalle" data-bs-dismiss="modal" style="background-color: rgb(89, 181, 72);">Add Detalle</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>

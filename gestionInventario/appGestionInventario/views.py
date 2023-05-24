@@ -183,7 +183,8 @@ def cerrarSesion(request):
     logout(request)
     # eliminar la sesión actual
     request.session.flush()
-    return redirect("/inicio")
+    mensaje = f"Se ha cerrado sesión"
+    return render(request,"login.html",{"mensaje":mensaje})
 
 def vistaGestionarDevolutivos(request):
     if request.user.is_authenticated:
