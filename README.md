@@ -14,6 +14,6 @@ los elementos el sistema tenga la capacidad de registrar la ubicación de los mi
 una bodega o deposito que cuenta con estantes y cada uno de esos estante tiene 4
 entrepaños.</p>
 
-###
+<hr>
 
 >By: Juan Sebastián Laguna Yara - ADSO 2023©
