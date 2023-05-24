@@ -1,6 +1,6 @@
-# Proyecto aplicación web para la gestión de iventarios de la línea de construcción CIES
+<h1 align="center">Proyecto aplicación web para la gestión de iventarios de la línea de construcción CIES</h1>
 
-<p>La línea de formación en Construcción requiere un sistema que le permita automatizar los
+<p align="justify">La línea de formación en Construcción requiere un sistema que le permita automatizar los
 procesos del inventario de los elementos que tienen en su custodia y que son utilizados
 para los procesos formativos del Centro de la Industria, la empresa y los servicios. Los
 elementos de inventario están compuestos por maquinaria, herramientas, equipos y
