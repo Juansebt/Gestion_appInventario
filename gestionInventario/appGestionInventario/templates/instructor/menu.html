@@ -1,7 +1,15 @@
 <div class="container-fluid">
-    <!-- <a class="navbar-brand" href="/inicioInstructor/" style="margin: 17px; padding-right: 6px">
-        <i class="fa fa-home mx-3 text-white" aria-hidden="true"></i>
-    </a> -->
+    <div class="dropdown">
+        <a class="mx-1" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="../media/{{user.userFoto}}" width="40" height="40" alt="" style="border-radius: 50%;">
+        </a>
+    
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+          <li><a class="dropdown-item" href="#">Editar datos personales</a></li>
+          <li><a class="dropdown-item" href="/cerrarSesion/">Cerrar sesión</a></li>
+        </ul>
+      </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,15 +17,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 13px">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown" style="margin-right: 20px">
-                <select name="cbRolMenu" id="cbRolMenu" class="form-control custom-select text-center" style="width: 20vh;">
+                <select name="cbRolMenu" id="cbRolMenu" class="form-control custom-select text-center"
+                    style="width: 20vh;">
                     {% for group in request.user.groups.all %}
-                        {% if group.name == 'Administrador' %}
-                            <option value="Administrador">Administrador</option>
-                            <option value="Asistente">Asistente</option>
-                            <option value="Instructor" selected>Instructor</option>
-                        {% else %}
-                            <option value="{{group.name}}">{{group.name}}</option>
-                        {% endif %}
+                    {% if group.name == 'Administrador' %}
+                    <option value="Administrador">Administrador</option>
+                    <option value="Asistente">Asistente</option>
+                    <option value="Instructor" selected>Instructor</option>
+                    {% else %}
+                    <option value="{{group.name}}">{{group.name}}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
             </li>
@@ -32,14 +41,14 @@
                     <li><a class="dropdown-item" href="#">Otro</a></li>
                 </ul>
             </li>
-            <li class="nav-item mx-2">
+            <!-- <li class="nav-item mx-2">
                 <a class="nav-link text-dark" href="/cerrarSesion/">Salir</a>
-            </li>
+            </li> -->
         </ul>
         <span class="navbar-text text-white" style="margin-right: 10px;">
             {{user.username}}
-            <a class="navbar-brand mx-2" href="#">
-              <img src="../media/{{user.userFoto}}" width="40" height="40" alt="" style="border-radius: 50%;">
+            <a class="navbar-brand" href="/inicioInstructor/" style="margin-left: 20px;">
+                <i class="fa fa-home text-white" aria-hidden="true"></i>
             </a>
         </span>
     </div>

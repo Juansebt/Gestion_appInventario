@@ -1,4 +1,15 @@
 <div class="container-fluid">
+  <div class="dropdown">
+    <a class="mx-1" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="../media/{{user.userFoto}}" width="40" height="40" alt="" style="border-radius: 50%;">
+    </a>
+
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+      <li><a class="dropdown-item" href="#">Editar datos personales</a></li>
+      <li><a class="dropdown-item" href="/cerrarSesion/">Cerrar sesión</a></li>
+    </ul>
+  </div>
   <!-- <a class="navbar-brand" href="/inicioAdministrador/" style="margin: 17px; padding-right: 6px;">Administrador</a> -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,17 +41,14 @@
       <li class="nav-item">
         <a class="nav-link text-white" href="#">Gestionar solicitudes</a>
       </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link text-dark" href="/cerrarSesion/">Salir</a>
-      </li>
       <!-- <li class="nav-item mx-2">
-        <a class="nav-link text-white" href="#">{{user.username}}</a>
+        <a class="nav-link text-dark" href="/cerrarSesion/">Salir</a>
       </li> -->
     </ul>
-    <span class="navbar-text text-white" style="margin-right: 10px;">
+    <span class="navbar-text text-white">
       {{user.username}}
-      <a class="navbar-brand mx-2" href="#">
-        <img src="../media/{{user.userFoto}}" width="40" height="40" alt="" style="border-radius: 50%;">
+      <a class="navbar-brand" href="/inicioAdministrador/" style="margin-left: 20px;">
+        <i class="fa fa-home text-white" aria-hidden="true"></i>
       </a>
     </span>
   </div>
