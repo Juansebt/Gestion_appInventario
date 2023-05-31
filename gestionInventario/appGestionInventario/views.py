@@ -101,7 +101,10 @@ def generarPassword():
     return password
 
 def vistaLogin(request):
-    return render(request,"login.html")
+    if (cerrarSesion):
+        mensaje = f"Se ha cerrado sesión"
+    retorno = {"mensaje":mensaje}
+    return render(request,"login.html",retorno)
 
 # class LoginForm(forms.Form):
 #     password = forms.CharField(widget=forms.PasswordInput())
@@ -183,8 +186,7 @@ def cerrarSesion(request):
     logout(request)
     # eliminar la sesión actual
     request.session.flush()
-    mensaje = f"Se ha cerrado sesión"
-    return render(request,"login.html",{"mensaje":mensaje})
+    return redirect("/vistaLogin/")
 
 def vistaGestionarDevolutivos(request):
     if request.user.is_authenticated:
@@ -339,3 +341,14 @@ def registrarEntradaMaterial(request):
             mensaje = f"Error: {error}"
         retorno = {"estado":estado,"mensaje":mensaje}
         return JsonResponse(retorno)
+    
+def vistaSolicitudElemento(request):
+    elementos = Elemento.objects.all()
+    unidadesMedidas = UnidadMedida.objects.all()
+    usuarios = User.objects.all()
+    materiales = Material.objects.all()
+    fichas = Ficha.objects.all()
+    
+    retorno = {"elementos":elementos,"unidadesMedidas":unidadesMedidas,"usuarios":usuarios,"materiales":materiales,"fichas":fichas}
+    return render(request, "instructor/frmSolicitudElemento.html",retorno)
+

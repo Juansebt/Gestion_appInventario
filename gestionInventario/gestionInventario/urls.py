@@ -39,6 +39,7 @@ urlpatterns = [
     path('registrarMaterial/', views.registrarMaterial),
     path('vistaEntradaMaterial/', views.vistaEntradaMaterial),
     path('registrarEntradaMaterial/', views.registrarEntradaMaterial),
+    path('vistaSolicitudElemento/', views.vistaSolicitudElemento)
 ]
 
 #Para poder tener acceso a la carpeta media y poder ver las fotos

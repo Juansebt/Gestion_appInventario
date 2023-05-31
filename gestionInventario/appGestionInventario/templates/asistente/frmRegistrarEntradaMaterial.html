@@ -118,7 +118,7 @@
                                 <select name="cbMaterial" id="cbMaterial" class="form-select">
                                     <option value="" selected disabled>Seleccione...</option>
                                     {% for material in materiales %}
-                                        <option value="{{material.id}}">{{material.matElemento.eleCodigo}}-{{material.matElemento.eleNombre}}</option>
+                                        <option value="{{material.id}}">{{material.matElemento.eleCodigo}} - {{material.matElemento.eleNombre}}</option>
                                     {% endfor %}
                                     
                                 </select>               
