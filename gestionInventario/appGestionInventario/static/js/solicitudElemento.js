@@ -1,6 +1,6 @@
 
-let materiales = []
-let entradaMateriales = []
+let elementos = []
+let solicitudElementos = []
 let unidadesMedida = []
 $(function(){
     // se utiliza para las peticiones ajax con jquery
@@ -10,16 +10,16 @@ $(function(){
         }
     })
 
-    $("#btnAgregarMaterialDetalle").click(function(){
-        agregarMaterialDetalle();
+    $("#btnAgregarDetalleSolicitud").click(function(){
+        agregarDetalleSolicitud();
     })
 
     $("#entradaMaterial").click(function(){
-        vistaEntradaMaterial();
+        vistaSolicitudElemento();
     })
 
-    $("#btnRegistrarDetalle").click(function(){
-        registroDetalleEntrada();
+    $("#btnRegistrarSolicitud").click(function(){
+        registroSolicitudMateriales();
     })
 })
 
@@ -45,22 +45,17 @@ function getCookie(name) {
     return cookieValue;
 }
 
-/**
- * Realiza la petición ajax para registrar
- * la entrada de materiales
- */
-function registroDetalleEntrada() {
+function registroSolicitudMateriales() {
     var datos = {
-        "codigoFactura": $("#txtFactura").val(),
-        "entregadoPor": $("#txtEntregadoPor").val(),
-        "proveedor": $("#cbProveedor").val(),
-        "recibidoPor": $("#cbRecibidoPor").val(),
+        "ficha": $("#cbFicha").val(),
+        "proyecto": $("#txtProyecto").val(),
+        "fechaHoraRequerida": $("#txtFechaHoraRequerida").val(),
+        "fechaHoraFin": $("#txtFechaHoraFin").val(),
         "observaciones": $("#txtObservaciones").val(),
-        "fechaHora": $("#txtFecha").val(),
-        "detalle": JSON.stringify(entradaMateriales),
+        "detalle": JSON.stringify(solicitudElementos),
     };
     $.ajax({
-        url: "/registrarEntradaMaterial/",
+        url: "/registrarSolicitudElemento/",
         data: datos,
         type:'POST',
         dataType:'json',
@@ -69,80 +64,54 @@ function registroDetalleEntrada() {
             console.log(resultado);
             if (resultado.estado) {
                 frmDatosGenerales.reset();
-                entradaMateriales.length=0;
+                solicitudElementos.length=0;
                 mostrarDatosTabla();
             }
-            Swal.fire("Registro de Materiales",resultado.mensaje,"success");
+            Swal.fire("Registro de Solicitud de Elementos",resultado.mensaje,"success");
         }
     })
 }
 
-/**
- * Agrega cada material al arreglo de entradaMateriales,
- * primero valida que no se haya agregado previamente
- */
-function agregarMaterialDetalle() {
-    // Averiguar si ya se ha agregado el material
-    const m = entradaMateriales.find(material=>material.idMaterial == $("#cbMaterial").val());
-    if (m==null) {
-        const material = {
-            "idMaterial": $("#cbMaterial").val(),
+function agregarDetalleSolicitud() {
+    const e = solicitudElementos.find(elemento=>elemento.idElemento == $("#cbElemento").val());
+    if (e==null) {
+        const elemento = {
+            "idElemento": $("#cbElemento").val(),
             "cantidad": $("#txtCantidad").val(),
-            "precio": $("#txtPrecio").val(),
             "idUnidadMedida": $("#cbUnidadMedida").val(),
-            "estado": $("#cbEstado").val(),
-            "observaciones": $("#txtObservaciones").val(),
         }
-        entradaMateriales.push(material);
-        frmEntradaMaterial.reset();
+        solicitudElementos.push(elemento);
+        frmDetalleSolicitud.reset();
         mostrarDatosTabla();
     } else {
-        Swal.fire("Entrada Materiales","El material seleccionado ya se ha agregado en el Detalle. Verifique","info");
+        Swal.fire("Detalle Solicitud","El elemento seleccionado ya se ha agregado en el Detalle. Verifique","info");
     }
 }
 
-/**
- * Agrega los materiales del arreglo  entradaMateriales
- * en la tabla html
- */
 function mostrarDatosTabla() {
     datos = "";
-    entradaMateriales.forEach(entrada => {
-        // obtiene la posición del material en el arreglo materiales de acuerdo al idMaterial
-        // del arreglo entradaMateriales, para poder obtener codigo y nombre del material
-        posM = materiales.findIndex(material=>material.idMaterial==entrada.idMaterial);
-        // obtiene la posición de la unidad de medida en el arreglo unidadesMedidas de acuerdo
-        // al idUnidadMedida en arreglo entradaMateriales para poder obtener el nombre
-        posU = unidadesMedida.findIndex(unidad=>unidad.id == entrada.idUnidadMedida);
+    solicitudElementos.forEach(detalle => {
+        
+        posE = elementos.findIndex(elemento=>elemento.idElemento==detalle.idElemento);
+        
+        posU = unidadesMedida.findIndex(unidad=>unidad.id == detalle.idUnidadMedida);
         datos += "<tr>";
-        datos += "<td class='text-center'>" + materiales[posM].codigo + "</td>";
-        datos += "<td class='text-center'>" + materiales[posM].nombre + "</td>";
-        datos += "<td class='text-center'>" + entrada.cantidad + "</td>";
-        datos += "<td class='text-center'>" + "$ " + entrada.precio + ".00" + "</td>";
-        datos += "<td class='text-center'>" + unidadesMedida[posU].nombre + "</td>";
-        datos += "<td class='text-center'>" + entrada.estado + "</td>";
-        datos += "<td class='text-center'>" + entrada.observaciones + "</td>";
+        datos += "<td class='text-center'>" + elementos[posE].codigo + "</td>";
+        datos += "<td class='text-center'>" + elementos[posE].nombre + "</td>";
+        datos += "<td class='text-center'>" + detalle.cantidad + "</td>";
+        // datos += "<td class='text-center'>" + unidadesMedida[posU].nombre + "</td>";
         datos += "</tr>";
     })
-    // agregar a la tabla con id datosTablaMateriales
-    datosTablaMateriales.innerHTML = datos;
+    datosTablaSolicitudes.innerHTML = datos;
 }
 
-/**
- * Obtiene los materiales registrados en el
- * sistema con los datos necesarios. Los recibe
- * de la vista y los almacena en un arreglo
- * @param {*} idMaterial 
- * @param {*} codigo 
- * @param {*} nombre 
- */
-function cargarMateriales(idMaterial, codigo, nombre) {
-    const material = {
-        "idMaterial": idMaterial,
+function cargarElementos(idElemento, codigo, nombre) {
+    const elemento = {
+        "idElemento": idElemento,
         "codigo":codigo,
         "nombre":nombre,
     }
-    materiales.push(material);
+    elementos.push(elemento);
 }
 
 /**

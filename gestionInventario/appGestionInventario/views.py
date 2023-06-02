@@ -352,3 +352,65 @@ def vistaSolicitudElemento(request):
     retorno = {"elementos":elementos,"unidadesMedidas":unidadesMedidas,"usuarios":usuarios,"materiales":materiales,"fichas":fichas}
     return render(request, "instructor/frmSolicitudElemento.html",retorno)
 
+def registrarSolicitudElemento(request):
+    if request.method == 'POST':
+        estado = False
+        mensaje = f""
+        try:
+            with transaction.atomic():
+                ficha = request.POST['ficha']
+                # data = json.loads(request.body)
+                # ficha = Ficha.objects.get(ficCodigo = data['ficha'])
+                nombreProyecto = request.POST['proyecto']
+                fechaHoraRequerida = request.POST.get('fechaHoraRequerida',None)
+                fechaHoraFin = request.POST.get('fechaHoraFin',None)
+                observaciones = request.POST['observaciones']
+                fichaSolicitud = Ficha.objects.get(pk=ficha)
+                solicitudElemento = SolicitudElemento(solUsuario = request.user, solFicha = fichaSolicitud, solProyecto = nombreProyecto,
+                                                      solFechaHoraRequerida = fechaHoraRequerida, solFechaHoraFin = fechaHoraFin,
+                                                      solEstado = "Solicitada", solObservaciones = observaciones)
+                solicitudElemento.save()
+                detallesElementos = json.loads(request.POST["detalle"])
+                for detalle in detallesElementos:
+                    elemento = Elemento.objects.get(id=int(detalle['idElemento']))
+                    cantidad = int(detalle['cantidad'])
+                    unidadMedida = UnidadMedida.objects.get(pk=int(detalle['idUnidadMedida']))
+                    detalleSolicitud = DetalleSolicitud(detSolicitud = solicitudElemento, detElemento = elemento,
+                                                        detUnidadMedida = unidadMedida, detCantidadRequerida = cantidad)
+                    detalleSolicitud.save()
+                    
+                estado = True
+                mensaje = f"Se ha registrado la solicitud de elementos correctamente"
+                
+                usuarios = User.objects.all()
+                
+                for user in usuarios:
+                    if user.groups.filter(name="Administrador").exists():
+                        correoAdministrador = user.email
+                        break
+                    
+                # enviar correo al instructor y al administrador
+                asunto = 'Registro Solicitud de Materiales - Inventario CIES'
+                contenido = f'Codrial saludo.<br>\
+                    Le informamos que se ha registrado una solicitud de elementos al Sistema de Gestión \
+                    de Inventario del centro de la industria, la empresa y los servicios CIES.<br>\
+                    Datos de la solicitud: <br>\
+                        <ul>\
+                            <li>Nombre: <b>{user.first_name} {user.last_name}</b></li>\
+                            <li>Ficha: <b>{ficha.ficCodigo} - {ficha.ficNombre}</b></li>\
+                            <li>Fecha-hora requerida: <b>{fechaHoraRequerida}</b></li>\
+                            <li>Fecha-hora fin: <b>{fechaHoraFin}</b></li>\
+                            <li>Fecha requerida: <b>{fechaHoraRequerida}</b></li>\
+                            <li>Cantidad: <b>{cantidad}</b></li>\
+                        </ul>\
+                    <br>La solicitud será revisada para poder ser aprovada por el administrador \
+                    <br>Lo invitamos a ingresar al sistema en el siguiente link:<br>\
+                    https://gestioninventario.sena.edu.co.'
+                threa = threading.Thread(target=enviarCorreo, args=(asunto,contenido,[user.email, correoAdministrador])) 
+                threa.start()
+        except Error as error:
+            transaction.rollback()
+            mensaje = f"Error: {error}"
+        retorno = {"estado":estado,"mensaje":mensaje}
+        return JsonResponse(retorno)
+
