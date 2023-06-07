@@ -414,3 +414,26 @@ def registrarSolicitudElemento(request):
         retorno = {"estado":estado,"mensaje":mensaje}
         return JsonResponse(retorno)
 
+def vistaUserAdministrador(request):
+    if request.user.is_authenticated:
+        return render(request,"administrador/userView.html")
+    
+def vistaUserAsistente(request):
+    if request.user.is_authenticated:
+        return render(request,"asistente/userView.html")
+    
+def vistaUserInstructor(request):
+    if request.user.is_authenticated:
+        return render(request,"instructor/userView.html")
+    
+def vistaUpdateUserAdministrador(request):
+    if request.user.is_authenticated:
+        return render(request,"administrador/updateUsuario.html")
+    
+def vistaUpdateUserAsistente(request):
+    if request.user.is_authenticated:
+        return render(request,"asistente/updateUsuario.html")
+    
+def vistaUpdateUserInstructor(request):
+    if request.user.is_authenticated:
+        return render(request,"instructor/updateUsuario.html")

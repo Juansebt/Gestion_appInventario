@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "asistente/menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container h-100" style="margin-top: 40px;">
+    <div class="row d-flex justify-content-center h-100">
+        <div class="mb-4">
+            <h3 class="text-center fw-bold">Perfil del usuario</h3>
+        </div>
+        <div class="col-12 col-md-9 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-5">
+                        <img src="../media/{{user.userFoto}}" class="img-fluid mx-auto d-block" width="250" height="250" alt="" title="{{user.first_name}} {{user.last_name}}" style="border-radius: 10%;">
+                    </div>
+                    <hr>
+                    <div class="mx-5">
+                        <p class="text-center">Nombre(s): <span>{{user.first_name}}</span></p>
+                    </div>
+                    <hr>
+                    <div class="mx-5">
+                        <p class="text-center">Apellido(s): <span>{{user.last_name}}</span></p>
+                    </div>
+                    <hr>
+                    <div class="mx-5">
+                        <p class="text-center">Correo: <span>{{user.email}}</span></p>
+                    </div>
+                    <hr>
+                    <div class="mx-5">
+                        <p class="text-center">Tipo de usuario: <span>{{user.userTipo}}</span></p>
+                    </div>
+                    <hr>
+                </div>
+                <div style="margin-top: -49px;">
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == 'Administrador' %}
+                    <p class="text-center">Administrador - <span class="fw-bold">Asistente</span> - Instructor</p>
+                    {% else %}
+                    <p class="text-center">{{group.name}}</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-body-secondary">Último ingreso : {{user.last_login}}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}
